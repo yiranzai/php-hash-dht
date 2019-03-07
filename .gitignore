@@ -1,0 +1,10 @@
+/.idea
+/.vscode
+/.vagrant
+.DS_Store
+*/.DS_Store
+build
+composer.lock
+vendor
+phpcs.xml
+phpunit.xml
