@@ -126,9 +126,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/yiranzai/hash-dht.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/yiranzai/hash-dht
-[link-travis]: https://travis-ci.org/yiranzai/hash-dht
-[link-scrutinizer]: https://scrutinizer-ci.com/g/yiranzai/hash-dht/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/yiranzai/hash-dht
+[link-travis]: https://travis-ci.org/yiranzai/php-hash-dht
+[link-scrutinizer]: https://scrutinizer-ci.com/g/yiranzai/php-hash-dht/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/yiranzai/php-hash-dht
 [link-downloads]: https://packagist.org/packages/yiranzai/hash-dht
 [link-author]: https://github.com/yiranzai
 [link-contributors]: ../../contributors
