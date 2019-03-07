@@ -94,7 +94,7 @@ class Hash implements \JsonSerializable
     /**
      * @return array
      */
-    private function supportHashAlgos(): array
+    public function supportHashAlgos(): array
     {
         return hash_algos();
     }
@@ -145,7 +145,7 @@ class Hash implements \JsonSerializable
     {
         $json = json_encode($this->jsonSerialize());
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \RuntimeException($this, json_last_error_msg());
+            throw new \RuntimeException(json_last_error_msg());
         }
 
         return $json;
@@ -178,14 +178,14 @@ class Hash implements \JsonSerializable
 
     /**
      * @param string $str
-     * @return string
+     * @return int
      */
-    private function hashGenerate(string $str): string
+    public function hashGenerate(string $str): int
     {
         if ($this->algo === self::DEFAULT_ALGO) {
             return $this->time33($str);
         }
-        return sprintf('%u', hash($this->algo, $str));
+        return (int)sprintf('%u', hash($this->algo, $str));
     }
 
     /**
@@ -195,10 +195,10 @@ class Hash implements \JsonSerializable
     private function time33(string $str): int
     {
         $hash = 0;
-        $s    = md5($str);
+        $str  = md5($str);
         $len  = 32;
         for ($i = 0; $i < $len; $i++) {
-            $hash = ($hash << 5) + $hash + ord($s{$i});
+            $hash = ($hash << 5) + $hash + ord($str{$i});
         }
         return $hash & 0x7FFFFFFF;
     }
@@ -211,7 +211,7 @@ class Hash implements \JsonSerializable
     public function getLocation(string $key)
     {
         if (empty($this->locations)) {
-            return false;
+            throw new \RuntimeException('This nodes is empty, please add a node');
         }
 
         $position = $this->hashGenerate($key);
@@ -269,6 +269,7 @@ class Hash implements \JsonSerializable
         foreach ($this->nodes[$node] as $v) {
             unset($this->locations[$v]);
         }
+        unset($this->nodes[$node]);
         return $this;
     }
 

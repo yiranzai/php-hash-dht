@@ -19,7 +19,7 @@ class Filesystem
      * @param  string $path
      * @return bool
      */
-    public function exists($path)
+    public function exists($path): bool
     {
         return file_exists($path);
     }
@@ -31,7 +31,7 @@ class Filesystem
      * @param  bool   $lock
      * @return string
      */
-    public function get($path, $lock = false)
+    public function get($path, $lock = false): string
     {
         if ($this->isFile($path)) {
             return $lock ? $this->sharedGet($path) : file_get_contents($path);
@@ -46,13 +46,13 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function sharedGet($path)
+    public function sharedGet($path): string
     {
         $contents = '';
 
         $handle = fopen($path, 'rb');
 
-        if ($handle) {
+        if ($handle !== false) {
             try {
                 if (flock($handle, LOCK_SH)) {
                     clearstatcache(true, $path);
@@ -89,9 +89,9 @@ class Filesystem
      * Require the given file once.
      *
      * @param  string $file
-     * @return mixed
+     * @return void
      */
-    public function requireOnce($file)
+    public function requireOnce($file): void
     {
         require_once $file;
     }
@@ -102,7 +102,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function hash($path)
+    public function hash($path): string
     {
         return md5_file($path);
     }
@@ -115,7 +115,7 @@ class Filesystem
      * @param  bool   $lock
      * @return int
      */
-    public function put($path, $contents, $lock = false)
+    public function put($path, $contents, $lock = false): int
     {
         return file_put_contents($path, $contents, $lock ? LOCK_EX : 0);
     }
@@ -127,7 +127,7 @@ class Filesystem
      * @param  string $data
      * @return int
      */
-    public function prepend($path, $data)
+    public function prepend($path, $data): int
     {
         if ($this->exists($path)) {
             return $this->put($path, $data . $this->get($path));
@@ -143,7 +143,7 @@ class Filesystem
      * @param  string $data
      * @return int
      */
-    public function append($path, $data)
+    public function append($path, $data): int
     {
         return file_put_contents($path, $data, FILE_APPEND);
     }
@@ -157,7 +157,7 @@ class Filesystem
      */
     public function chmod($path, $mode = null)
     {
-        if ($mode) {
+        if ($mode !== null) {
             return chmod($path, $mode);
         }
 
@@ -170,7 +170,7 @@ class Filesystem
      * @param  string|array $paths
      * @return bool
      */
-    public function delete($paths)
+    public function delete($paths): bool
     {
         $paths = is_array($paths) ? $paths : func_get_args();
 
@@ -196,7 +196,7 @@ class Filesystem
      * @param  string $target
      * @return bool
      */
-    public function move($path, $target)
+    public function move($path, $target): bool
     {
         return rename($path, $target);
     }
@@ -208,7 +208,7 @@ class Filesystem
      * @param  string $target
      * @return bool
      */
-    public function copy($path, $target)
+    public function copy($path, $target): bool
     {
         return copy($path, $target);
     }
@@ -220,10 +220,10 @@ class Filesystem
      * @param  string $link
      * @return void
      */
-    public function link($target, $link)
+    public function link($target, $link): void
     {
         if (!$this->windowsOs()) {
-            return symlink($target, $link);
+            symlink($target, $link);
         }
 
         $mode = $this->isDirectory($target) ? 'J' : 'H';
@@ -237,7 +237,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function name($path)
+    public function name($path): string
     {
         return pathinfo($path, PATHINFO_FILENAME);
     }
@@ -248,7 +248,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function basename($path)
+    public function basename($path): string
     {
         return pathinfo($path, PATHINFO_BASENAME);
     }
@@ -259,7 +259,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function dirname($path)
+    public function dirname($path): string
     {
         return pathinfo($path, PATHINFO_DIRNAME);
     }
@@ -270,7 +270,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function extension($path)
+    public function extension($path): string
     {
         return pathinfo($path, PATHINFO_EXTENSION);
     }
@@ -281,7 +281,7 @@ class Filesystem
      * @param  string $path
      * @return string
      */
-    public function type($path)
+    public function type($path): string
     {
         return filetype($path);
     }
@@ -303,7 +303,7 @@ class Filesystem
      * @param  string $path
      * @return int
      */
-    public function size($path)
+    public function size($path): int
     {
         return filesize($path);
     }
@@ -314,7 +314,7 @@ class Filesystem
      * @param  string $path
      * @return int
      */
-    public function lastModified($path)
+    public function lastModified($path): int
     {
         return filemtime($path);
     }
@@ -325,7 +325,7 @@ class Filesystem
      * @param  string $directory
      * @return bool
      */
-    public function isDirectory($directory)
+    public function isDirectory($directory): bool
     {
         return is_dir($directory);
     }
@@ -336,7 +336,7 @@ class Filesystem
      * @param  string $path
      * @return bool
      */
-    public function isReadable($path)
+    public function isReadable($path): bool
     {
         return is_readable($path);
     }
@@ -347,7 +347,7 @@ class Filesystem
      * @param  string $path
      * @return bool
      */
-    public function isWritable($path)
+    public function isWritable($path): bool
     {
         return is_writable($path);
     }
@@ -358,7 +358,7 @@ class Filesystem
      * @param  string $file
      * @return bool
      */
-    public function isFile($file)
+    public function isFile($file): bool
     {
         return is_file($file);
     }
@@ -370,7 +370,7 @@ class Filesystem
      * @param  int    $flags
      * @return array
      */
-    public function glob($pattern, $flags = 0)
+    public function glob($pattern, $flags = 0): array
     {
         return glob($pattern, $flags);
     }
@@ -384,7 +384,7 @@ class Filesystem
      * @param  bool   $force
      * @return bool
      */
-    public function makeDirectory($path, $mode = 0755, $recursive = false, $force = false)
+    public function makeDirectory($path, $mode = 0755, $recursive = false, $force = false): bool
     {
         if ($force) {
             return @mkdir($path, $mode, $recursive);
@@ -401,12 +401,10 @@ class Filesystem
      * @param  bool   $overwrite
      * @return bool
      */
-    public function moveDirectory($from, $to, $overwrite = false)
+    public function moveDirectory($from, $to, $overwrite = false): bool
     {
-        if ($overwrite && $this->isDirectory($to)) {
-            if (!$this->deleteDirectory($to)) {
-                return false;
-            }
+        if ($overwrite && $this->isDirectory($to) && !$this->deleteDirectory($to)) {
+            return false;
         }
 
         return @rename($from, $to) === true;
@@ -420,7 +418,7 @@ class Filesystem
      * @param  int    $options
      * @return bool
      */
-    public function copyDirectory($directory, $destination, $options = null)
+    public function copyDirectory($directory, $destination, $options = null): bool
     {
         if (!$this->isDirectory($directory)) {
             return false;
@@ -428,9 +426,6 @@ class Filesystem
 
         $options = $options ?: FilesystemIterator::SKIP_DOTS;
 
-        // If the destination directory does not actually exist, we will go ahead and
-        // create it recursively, which just gets the destination prepared to copy
-        // the files over. Once we make the directory we'll proceed the copying.
         if (!$this->isDirectory($destination)) {
             $this->makeDirectory($destination, 0777, true);
         }
@@ -438,9 +433,6 @@ class Filesystem
         $items = new FilesystemIterator($directory, $options);
 
         foreach ($items as $item) {
-            // As we spin through items, we will check to see if the current file is actually
-            // a directory or a file. When it is actually a directory we will need to call
-            // back into this function recursively to keep copying these nested folders.
             $target = $destination . '/' . $item->getBasename();
 
             if (!$item->isDir()) {
@@ -468,7 +460,7 @@ class Filesystem
      * @param  bool   $preserve
      * @return bool
      */
-    public function deleteDirectory($directory, $preserve = false)
+    public function deleteDirectory($directory, $preserve = false): bool
     {
         if (!$this->isDirectory($directory)) {
             return false;
@@ -477,9 +469,6 @@ class Filesystem
         $items = new FilesystemIterator($directory);
 
         foreach ($items as $item) {
-            // If the item is a directory, we can just recurse into the function and
-            // delete that sub-directory otherwise we'll just delete the file and
-            // keep iterating through each file until the directory is cleaned.
             if ($item->isDir() && !$item->isLink()) {
                 $this->deleteDirectory($item->getPathname());
             } else {
@@ -500,7 +489,7 @@ class Filesystem
      * @param  string $directory
      * @return bool
      */
-    public function cleanDirectory($directory)
+    public function cleanDirectory($directory): bool
     {
         return $this->deleteDirectory($directory, true);
     }
@@ -510,7 +499,7 @@ class Filesystem
      *
      * @return bool
      */
-    public function windowsOs()
+    public function windowsOs(): bool
     {
         return stripos(PHP_OS, 'win') === 0;
     }
