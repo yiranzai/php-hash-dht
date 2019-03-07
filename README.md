@@ -120,9 +120,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/yiranzai/hash-dht.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/yiranzai/hash-dht/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/yiranzai/hash-dht.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/yiranzai/hash-dht.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/yiranzai/php-hash-dht/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/yiranzai/php-hash-dht.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/yiranzai/php-hash-dht.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/yiranzai/hash-dht.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/yiranzai/hash-dht
