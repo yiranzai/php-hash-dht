@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/yiranzai/hash-hash-dht).
+We accept contributions via Pull Requests on [Github](https://github.com/yiranzai/php-hash-dht).
 
 
 ## Pull Requests

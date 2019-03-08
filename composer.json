@@ -6,7 +6,7 @@
         "yiranzai",
         "hash-dht"
     ],
-    "homepage": "https://github.com/yiranzai/hash-dht",
+    "homepage": "https://github.com/yiranzai/php-hash-dht",
     "license": "MIT",
     "authors": [
         {
@@ -17,9 +17,10 @@
         }
     ],
     "require": {
-        "php" : "~7.1",
+        "php": "~7.1",
+        "ext-fileinfo": "*",
         "ext-json": "*",
-        "ext-fileinfo": "*"
+        "yiranzai/dht": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit" : ">=7.0",
