@@ -70,33 +70,6 @@ class Filesystem
     }
 
     /**
-     * Get the returned value of a file.
-     *
-     * @param  string $path
-     * @return mixed
-     *
-     */
-    public function getRequire($path)
-    {
-        if ($this->isFile($path)) {
-            return require $path;
-        }
-
-        throw new \RuntimeException("File does not exist at path {$path}");
-    }
-
-    /**
-     * Require the given file once.
-     *
-     * @param  string $file
-     * @return void
-     */
-    public function requireOnce($file): void
-    {
-        require_once $file;
-    }
-
-    /**
      * Get the MD5 hash of the file at the given path.
      *
      * @param  string $path
@@ -211,24 +184,6 @@ class Filesystem
     public function copy($path, $target): bool
     {
         return copy($path, $target);
-    }
-
-    /**
-     * Create a hard link to the target file or directory.
-     *
-     * @param  string $target
-     * @param  string $link
-     * @return void
-     */
-    public function link($target, $link): void
-    {
-        if (!$this->windowsOs()) {
-            symlink($target, $link);
-        }
-
-        $mode = $this->isDirectory($target) ? 'J' : 'H';
-
-        exec("mklink /{$mode} \"{$link}\" \"{$target}\"");
     }
 
     /**
@@ -364,18 +319,6 @@ class Filesystem
     }
 
     /**
-     * Find path names matching a given pattern.
-     *
-     * @param  string $pattern
-     * @param  int    $flags
-     * @return array
-     */
-    public function glob($pattern, $flags = 0): array
-    {
-        return glob($pattern, $flags);
-    }
-
-    /**
      * Create a directory.
      *
      * @param  string $path
@@ -477,7 +420,7 @@ class Filesystem
         }
 
         if (!$preserve) {
-            @rmdir($directory);
+            /** @scrutinizer ignore-unhandled */ @rmdir($directory);
         }
 
         return true;

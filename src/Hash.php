@@ -111,6 +111,8 @@ class Hash implements \JsonSerializable
         }
         if (is_array($data)) {
             $data = json_encode($data);
+        } elseif ($data instanceof \JsonSerializable) {
+            $data = json_encode($data);
         } else {
             json_decode($data, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
