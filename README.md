@@ -54,7 +54,7 @@ $hash->deleteEntityNode('db_server_one');
 
 ### Change algo
 
-default algo is time33
+default algo is time33, [See more support](SUPPORT_ALGOS.md)
 
 ```php
 $hash = new Yiranzai\Dht\Hash();
@@ -62,7 +62,7 @@ $hash->algo('sha256');
 
 //or
 
-$hash = new Yiranzai\Dht\Hash(['algo' => YOUR_PATH]);
+$hash = new Yiranzai\Dht\Hash(['algo' => YOUR_ALGO]);
 ```
 
 ### Change default cache path
