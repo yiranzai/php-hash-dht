@@ -1,5 +1,10 @@
 # hash-dht
 
+<p align="center">
+  <img src="https://cdn.yiranzai.cn/yiranzai/logo/mouse/mouse.png" alt="" width="20%">
+</p>
+
+
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
